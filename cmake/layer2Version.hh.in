@@ -1,0 +1,6 @@
+// the configured options and settings for layer2 
+#define Layer2_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
+#define Layer2_VERSION_MINOR @PROJECT_VERSION_MINOR@
+#define Layer2_VERSION_PATCH @PROJECT_VERSION_PATCH@
+#define Layer2_VERSION "@PROJECT_VERSION@"
+

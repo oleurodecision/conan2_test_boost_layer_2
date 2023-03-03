@@ -1,0 +1,28 @@
+@PACKAGE_INIT@
+
+include (CMakeFindDependencyMacro)
+
+# ---------------------------------------------------------------------------
+# Dependencies
+# ---------------------------------------------------------------------------
+find_dependency (layer1)
+
+# ---------------------------------------------------------------------------
+# Targets
+# ---------------------------------------------------------------------------
+if (NOT TARGET layer2::layer2)
+	include ("${CMAKE_CURRENT_LIST_DIR}/layer2-targets.cmake")
+endif ()
+
+# ---------------------------------------------------------------------------
+# Components
+# ---------------------------------------------------------------------------
+foreach(_comp ${layer2_FIND_COMPONENTS})
+	include("${CMAKE_CURRENT_LIST_DIR}/layer2-${_comp}-config.cmake" OPTIONAL RESULT_VARIABLE _FOUND)
+	if (NOT _FOUND)
+		set (layer2_FOUND False)
+		set (layer2_NOT_FOUND_MESSAGE "Unsupported component: ${_comp}")
+	endif()
+endforeach()
+
+list (PREPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/")
